@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">Things To Do</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item <%= (path === '/') ? 'active' : '' ;%>">
+                    <a class="nav-link" href="/">
+                        Home
+                        <% if(path === '/') { %>
+                            <span class="sr-only">(current)</span>
+                        <% } %>
+                    </a>
+                </li>
+                <li class="nav-item <%= (path === '/write') ? 'active' : '' ;%>">
+                    <a class="nav-link" href="/write"
+                    >Add
+                        <% if(path === '/write') { %>
+                            <span class="sr-only">(current)</span>
+                        <% } %>
+                    </a
+                    >
+                </li>
+                <li class="nav-item <%= (path === '/todos') ? 'active' : '' ;%>">
+                    <a class="nav-link" href="/todos"
+                    >Todos
+                        <% if(path === '/todos') { %>
+                            <span class="sr-only">(current)</span>
+                        <% } %>
+                    </a
+                    >
+                </li>
+                <li class="nav-item <%= (path === '/mypage') ? 'active' : '' ;%>">
+                    <a class="nav-link" href="/mypage"
+                    >MyPage
+                        <% if(path === '/mypage') { %>
+                            <span class="sr-only">(current)</span>
+                        <% } %>
+                    </a
+                    >
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <% if (user) { %>
+                        <button class="btn btn-outline-success my-2 my-sm-0" onclick="location.href='/logout'">Logout</button>
+                    <% } else { %>
+                        <button class="btn btn-outline-success my-2 my-sm-0" onclick="location.href='/login'">Login</button>
+                    <% } %>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
