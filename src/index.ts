@@ -37,16 +37,18 @@ app.use(passport.session());
 // body parser configuration
 app.use(bodyParser());
 
+// logger configuration
+app.use(logger());
+
 // router configuration
 const router: Router = new Router();
-
-app.use(logger());
 app.use(router.routes());
 app.use(router.allowedMethods());
 
 router.use('', pages.routes());
 router.use('', api.routes());
 
+// database connection & server port initialization
 async function initialize() {
   await db();
   app.listen(port, () => {
