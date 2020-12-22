@@ -1,10 +1,12 @@
 import Router from 'koa-router';
-import todo from '../../models/todo';
+
+import { auth } from '../../lib/auth';
 import counter, { Counter } from '../../models/counter';
+import todo from '../../models/todo';
 
 export const todos = new Router();
 
-todos.post('/', async (ctx) => {
+todos.post('/', auth, async (ctx) => {
   try {
     const postCount: Counter = await counter.findOne({ name: 'postCount' });
     const todoId: number = postCount.totalPost + 1;
@@ -12,18 +14,18 @@ todos.post('/', async (ctx) => {
     const date: string = ctx.request.body.date;
     await todo.create({ _id: todoId, title: title, date: date });
     await counter.update({ name: 'postCount' }, { $inc: { totalPost: 1 } });
-    await ctx.redirect('/todos');
+    ctx.redirect('/todos');
   } catch (err) {
     console.log(err);
     ctx.status = 400;
   }
 });
 
-todos.put('/:id', async (ctx) => {
+todos.put('/:id', auth, async (ctx) => {
   try {
     const id: number = parseInt(ctx.params.id);
-    const title: string = ctx.body.title;
-    const date: string = ctx.body.date;
+    const title: string = ctx.request.body.title;
+    const date: string = ctx.request.body.date;
     await todo.updateOne({ _id: id }, { $set: { title: title, date: date } });
     ctx.status = 200;
   } catch (err) {
@@ -31,7 +33,7 @@ todos.put('/:id', async (ctx) => {
   }
 });
 
-todos.delete('/:id', async (ctx) => {
+todos.delete('/:id', auth, async (ctx) => {
   try {
     const id: number = parseInt(ctx.params.id);
     await todo.deleteOne({ _id: id });

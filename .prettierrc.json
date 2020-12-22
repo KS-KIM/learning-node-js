@@ -7,5 +7,7 @@
   "bracketSpacing": true,
   "printWidth": 120,
   "useTabs": false,
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
+  "importOrderSeparation": true
 }
