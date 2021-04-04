@@ -1,11 +1,13 @@
-import Koa, { Context } from "koa";
+import "reflect-metadata";
 
-const application = new Koa();
+import ApiApplication from "./ApiApplication";
+import { TypeOrm } from "./infra/database/TypeOrm";
 
-application.use((context: Context) => {
-  context.body = "hello, world";
-});
+(async () => {
+  await TypeOrm;
 
-application.listen(8080, () => {
-  console.info("Koa auth-practice application is started.");
-});
+  const apiApplication = await ApiApplication();
+  apiApplication.listen(8080, () => {
+    console.info("Koa auth-practice application is running.");
+  });
+})();

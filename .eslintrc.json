@@ -13,9 +13,19 @@
         "sourceType": "module"
     },
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "unused-imports",
+        "simple-import-sort"
     ],
     "rules": {
+        "no-unused-vars": "off",
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+            "warn",
+            { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+        ],
         "indent": [
             "error",
             2
@@ -26,7 +36,6 @@
         ],
         "no-trailing-spaces": 0,
         "keyword-spacing": 0,
-        "no-unused-vars": 1,
         "no-multiple-empty-lines": 0,
         "space-before-function-paren": 0,
         "eol-last": 0
