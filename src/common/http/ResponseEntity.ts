@@ -26,18 +26,21 @@ export class ResponseEntity<T> {
     return new ResponseEntity(StatusCode.NO_CONTENT);
   }
 
-  header(key: string, value: string) {
+  header(key: string, value: string): ResponseEntity<T> {
     this._responseHeaders.setHeader(key, value);
+    return this;
   }
 
-  headers(headers: HttpHeaders): void {
+  headers(headers: HttpHeaders): ResponseEntity<T> {
     for (const [key, value] of headers.entries()) {
       this._responseHeaders.setHeader(key, value);
     }
+    return this;
   }
 
-  body(body: T): void {
+  body(body: T): ResponseEntity<T> {
     this._responseBody = body;
+    return this;
   }
 
   get statusCode(): StatusCode {
